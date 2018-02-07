@@ -12598,11 +12598,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\git\\Dapper-Lambda\\DapperLambdaExtensions\\Demo\\Demo.csproj",
+      "projectUniqueName": "C:\\git\\DapperLambdaExtensions\\Demo\\Demo.csproj",
       "projectName": "Demo",
-      "projectPath": "C:\\git\\Dapper-Lambda\\DapperLambdaExtensions\\Demo\\Demo.csproj",
+      "projectPath": "C:\\git\\DapperLambdaExtensions\\Demo\\Demo.csproj",
       "packagesPath": "C:\\Users\\daniel\\.nuget\\packages\\",
-      "outputPath": "C:\\git\\Dapper-Lambda\\DapperLambdaExtensions\\Demo\\obj\\",
+      "outputPath": "C:\\git\\DapperLambdaExtensions\\Demo\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -12621,8 +12621,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\git\\Dapper-Lambda\\DapperLambdaExtensions\\DapperLambdaExtensions\\DapperLambdaExtensions.csproj": {
-              "projectPath": "C:\\git\\Dapper-Lambda\\DapperLambdaExtensions\\DapperLambdaExtensions\\DapperLambdaExtensions.csproj"
+            "C:\\git\\DapperLambdaExtensions\\DapperLambdaExtensions\\DapperLambdaExtensions.csproj": {
+              "projectPath": "C:\\git\\DapperLambdaExtensions\\DapperLambdaExtensions\\DapperLambdaExtensions.csproj"
             }
           }
         }

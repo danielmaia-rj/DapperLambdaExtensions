@@ -1843,11 +1843,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\git\\Dapper-Lambda\\DapperLambdaExtensions\\DapperLambdaExtensions\\DapperLambdaExtensions.csproj",
+      "projectUniqueName": "C:\\git\\DapperLambdaExtensions\\DapperLambdaExtensions\\DapperLambdaExtensions.csproj",
       "projectName": "DapperLambdaExtensions",
-      "projectPath": "C:\\git\\Dapper-Lambda\\DapperLambdaExtensions\\DapperLambdaExtensions\\DapperLambdaExtensions.csproj",
+      "projectPath": "C:\\git\\DapperLambdaExtensions\\DapperLambdaExtensions\\DapperLambdaExtensions.csproj",
       "packagesPath": "C:\\Users\\daniel\\.nuget\\packages\\",
-      "outputPath": "C:\\git\\Dapper-Lambda\\DapperLambdaExtensions\\DapperLambdaExtensions\\obj\\",
+      "outputPath": "C:\\git\\DapperLambdaExtensions\\DapperLambdaExtensions\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
