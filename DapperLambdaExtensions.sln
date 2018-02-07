@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2024
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DapperLambdaExtensions", "DapperLambdaExtensions\DapperLambdaExtensions.csproj", "{A3E60B5B-3659-442A-BBD0-F5BE7CAB767E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo", "Demo\Demo.csproj", "{F4890A1C-B97D-4B5B-91BD-F88504A18E70}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A3E60B5B-3659-442A-BBD0-F5BE7CAB767E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3E60B5B-3659-442A-BBD0-F5BE7CAB767E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3E60B5B-3659-442A-BBD0-F5BE7CAB767E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3E60B5B-3659-442A-BBD0-F5BE7CAB767E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4890A1C-B97D-4B5B-91BD-F88504A18E70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4890A1C-B97D-4B5B-91BD-F88504A18E70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4890A1C-B97D-4B5B-91BD-F88504A18E70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4890A1C-B97D-4B5B-91BD-F88504A18E70}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {67061EB4-8799-4441-9E85-CC49E328C234}
+	EndGlobalSection
+EndGlobal

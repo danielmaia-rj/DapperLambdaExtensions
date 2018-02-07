@@ -1,0 +1,9 @@
+C:\git\Dapper-Lambda\DapperLambdaExtensions\DapperLambdaExtensions\bin\Debug\netcoreapp2.0\DapperLambdaExtensions.deps.json
+C:\git\Dapper-Lambda\DapperLambdaExtensions\DapperLambdaExtensions\bin\Debug\netcoreapp2.0\DapperLambdaExtensions.dll
+C:\git\Dapper-Lambda\DapperLambdaExtensions\DapperLambdaExtensions\obj\Debug\netcoreapp2.0\DapperLambdaExtensions.csprojResolveAssemblyReference.cache
+C:\git\Dapper-Lambda\DapperLambdaExtensions\DapperLambdaExtensions\obj\Debug\netcoreapp2.0\DapperLambdaExtensions.csproj.CoreCompileInputs.cache
+C:\git\Dapper-Lambda\DapperLambdaExtensions\DapperLambdaExtensions\obj\Debug\netcoreapp2.0\DapperLambdaExtensions.AssemblyInfoInputs.cache
+C:\git\Dapper-Lambda\DapperLambdaExtensions\DapperLambdaExtensions\obj\Debug\netcoreapp2.0\DapperLambdaExtensions.AssemblyInfo.cs
+C:\git\Dapper-Lambda\DapperLambdaExtensions\DapperLambdaExtensions\bin\Debug\netcoreapp2.0\DapperLambdaExtensions.pdb
+C:\git\Dapper-Lambda\DapperLambdaExtensions\DapperLambdaExtensions\obj\Debug\netcoreapp2.0\DapperLambdaExtensions.dll
+C:\git\Dapper-Lambda\DapperLambdaExtensions\DapperLambdaExtensions\obj\Debug\netcoreapp2.0\DapperLambdaExtensions.pdb
