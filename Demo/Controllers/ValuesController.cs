@@ -16,9 +16,9 @@ namespace Demo.Controllers
         [HttpGet]
         public string Get()
         {
-            heroService.SelectHeroName();
+            //heroService.SelectHeroName();
             heroService.SelectHeroModelFromHeroEntity();
-            heroService.UpdateHeroNameOnly();
+            //heroService.UpdateHeroNameOnly();
 
             return "value1";
         }        

@@ -2,6 +2,8 @@
 using DapperLambdaExtensions.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
@@ -60,45 +62,28 @@ namespace DapperLambdaExtensions
             return dbConnection.Execute(sql, entity);
         }
 
-        public IEnumerable<TModel> Get<TModel>(Expression<Func<TEntity, TModel>> lambda, IDictionary<string, object> parameters = null)
+        public IEnumerable<TModel> GetModel<TModel>(Expression<Func<TEntity, TModel>> lambda, IDictionary<string, object> parameters = null)
         {
-            var sb = new StringBuilder(@"select ");
-            var expressions = (MemberInitExpression)lambda.Body;
+            var expression = (MemberInitExpression)lambda.Body;
 
-            foreach (var item in expressions.Bindings)
-            {
-                var model = item.Member.Name;
-                var entity = ((MemberExpression)((MemberAssignment)item).Expression).Member.Name;
+            var relationship = new Dictionary<Type, Type>();
 
-                sb.AppendFormat(@"{0} as {1},", entity, model);
-            }
+            var mainSelect = new StringBuilder(@"select ");
 
-            sb = sb.Remove(sb.Length - 1, 1);
+            var dynamicParameters = new DynamicParameters();
 
-            sb.AppendFormat(@" from {0} ", typeof(TEntity).Name);
+            BuildMainSelect(mainSelect, relationship, expression);
 
-            var sqlParam = new DynamicParameters();
+            BuildFrom(mainSelect, relationship);
 
-            if (parameters != null && parameters.Any())
-            {
-                sb.Append(@"where ");
+            BuildWhere(mainSelect, parameters, dynamicParameters);
 
-                foreach (var param in parameters)
-                {
-                    sb.AppendFormat(@"{0} = :{0} and ", param.Key);
+            var sql = mainSelect.ToString();
 
-                    sqlParam.Add(string.Format(":{0}", param.Key), param.Value);
-                }
-
-                sb = sb.Remove(sb.Length - (" and ").Length, (" and ").Length);
-            }
-
-            var sql = sb.ToString();
-
-            return dbConnection.Query<TModel>(sql, sqlParam);
+            return dbConnection.Query<TModel>(sql, dynamicParameters);
         }
 
-        public IEnumerable<TEntity> Get(Expression<Func<TEntity, object>> lambda, IDictionary<string, object> parameters = null)
+        public IEnumerable<TEntity> GetEntity(Expression<Func<TEntity, object>> lambda, IDictionary<string, object> parameters = null)
         {
             var sb = new StringBuilder(@"select ");
             var expressions = (NewExpression)lambda.Body;
@@ -200,6 +185,76 @@ namespace DapperLambdaExtensions
         private static IEnumerable<PropertyInfo> GetPropertiesWithValuesNotNull(TEntity entity)
         {
             return typeof(TEntity).GetProperties().Where(p => p.GetValue(entity, null) != null);
+        }
+
+        private static void BuildMainSelect(StringBuilder mainSelect, Dictionary<Type, Type> relationship, MemberInitExpression expressions)
+        {
+            foreach (var item in expressions.Bindings)
+            {
+                var expression = ((MemberExpression)((MemberAssignment)item).Expression);
+                var entity = expression.Expression.Type;
+
+                var entityPropertyName = expression.Member.Name;
+                var modelPropertyName = item.Member.Name;
+
+                var memberAssignment = (MemberAssignment)item;
+                var memberExpression = (MemberExpression)memberAssignment.Expression;
+
+                if (memberExpression.Expression is MemberExpression memberExpressionChild)
+                {                 
+                    if (!(relationship.TryGetValue(entity, out Type type) && type == memberExpressionChild.Member.ReflectedType))
+                    {
+                        relationship.Add(entity, memberExpressionChild.Member.ReflectedType);
+                    }
+                }
+
+                mainSelect.AppendFormat(@"{0}.{1} as {2},",
+                    entity.Name.ToLower(), entityPropertyName, modelPropertyName);
+            }
+
+            mainSelect = mainSelect.Remove(mainSelect.Length - 1, 1);
+        }
+
+        private static void BuildFrom(StringBuilder mainSelect, Dictionary<Type, Type> relationship)
+        {
+            mainSelect.AppendFormat(@" from {0} ", typeof(TEntity).Name);
+
+            foreach (var item in relationship)
+            {
+                var foreignKeyFromMainEntity = item.Value
+                    .GetProperties()
+                    .Where(propInfo =>
+                        propInfo.GetCustomAttributes(true).Any(attr => attr.GetType() == typeof(ForeignKeyAttribute)) &&
+                        propInfo.GetCustomAttribute<ForeignKeyAttribute>().Name == item.Key.Name)
+                    .FirstOrDefault();
+
+                var primaryKeyFromEntityRelationship = item.Key
+                    .GetProperties()
+                    .Where(propInfo => propInfo.GetCustomAttributes(true).Any(a => a.GetType() == typeof(KeyAttribute)))
+                    .FirstOrDefault();
+
+                mainSelect.AppendFormat(@"inner join {0} ", item.Key.Name);
+                mainSelect.AppendFormat(@"on {0}.{2} = {1}.{3} ",
+                    item.Value.Name, item.Key.Name,
+                    foreignKeyFromMainEntity.Name, primaryKeyFromEntityRelationship.Name);
+            }
+        }
+
+        private static void BuildWhere(StringBuilder mainSelect, IDictionary<string, object> parameters, DynamicParameters dynamicParameters)
+        {
+            if (parameters != null && parameters.Any())
+            {
+                mainSelect.Append(@"where ");
+
+                foreach (var param in parameters)
+                {
+                    mainSelect.AppendFormat(@"{0} = :{1} and ", param.Key, param.Key.Replace(".", ""));
+
+                    dynamicParameters.Add(string.Format(":{0}", param.Key.Replace(".", "")), param.Value);
+                }
+
+                mainSelect = mainSelect.Remove(mainSelect.Length - (" and ").Length, (" and ").Length);
+            }
         }
     }
 }

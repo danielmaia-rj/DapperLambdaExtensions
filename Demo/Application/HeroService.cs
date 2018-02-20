@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Demo.Application
 {
-    public class HeroService: IHeroService
+    public class HeroService : IHeroService
     {
         private readonly IHeroRepository heroRepository;
 
@@ -19,8 +19,8 @@ namespace Demo.Application
         /// </summary>
         /// <param name="heroRepository"></param>
         public void SelectHeroName()
-        {            
-            var partialHero = heroRepository.Get((Hero hero) =>
+        {
+            var partialHero = heroRepository.GetModel((Hero hero) =>
                 new
                 {
                     hero.Name
@@ -34,10 +34,14 @@ namespace Demo.Application
         /// <param name="heroRepository"></param>
         public void SelectHeroModelFromHeroEntity()
         {
-            var heroMapToHeroModel = heroRepository.Get(entity =>
+            var heroMapToHeroModel = heroRepository.GetModel(entity =>
                 new HeroModel()
                 {
-                    Name = entity.Name
+                    Name = entity.Name,
+                    Skill = entity.HeroHabilities.Skill,
+                    XPTO = entity.HeroHabilities.SkillXPTO.Descricao,
+                    Adquirido = entity.HeroHabilities.Adquirido,                    
+                    Data = entity.HeroHabilities.DataHabilidade
                 }
             );
         }
@@ -53,7 +57,7 @@ namespace Demo.Application
                 {
                     { "Id", 10 }
                 };
-            
+
             heroRepository.Update(hero =>
                 new Hero()
                 {
